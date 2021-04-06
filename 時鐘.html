@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Train+One&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font: inherit;
+            vertical-align: baseline;
+            background: black;
+            height: 100%;
+            font-family: 'Train One', cursive;
+            background: url(./bg.jpg) no-repeat center center/cover;
+            color: white;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+
+        .box {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: auto;
+
+
+        }
+
+        #sclock {
+            width: 350px;
+            height: 350px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        #mclock {
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #hclock {
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #hour {
+            width: 14px;
+            height: 14px;
+            background: yellow;
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 7px);
+            left: calc(50% - 7px);
+            transition: transform 1s;
+            transition-timing-function: linear;
+
+        }
+
+        #minute {
+            width: 14px;
+            height: 14px;
+            background: skyblue;
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 7px);
+            left: calc(50% - 7px);
+            transition: transform 1s;
+            transition-timing-function: linear;
+        }
+
+
+        #second {
+            width: 14px;
+            height: 14px;
+            background: plum;
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 7px);
+            left: calc(50% - 7px);
+            transition: transform 1s;
+            transition-timing-function: linear;
+        }
+
+        #name {
+            font-size: 20px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #hnumber {
+            font-size: 22px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #mnumber {
+            font-size: 22px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #snumber {
+            font-size: 22px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+
+        #center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+
+        img {
+            transition: transform 1s;
+            transition-timing-function: linear;
+        }
+
+        #little {
+            width: 4px;
+            height: 4px;
+            background: rgb(252, 250, 223);
+            border-radius: 35%;
+            position: absolute;
+            top: calc(50% - 2px);
+            left: calc(50% - 2px);
+            transform: translateY(-25px);
+            transition: transform 1s;
+            transition-timing-function: linear;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <div id="sclock">
+                <div id="hclock">
+                    <span id="name">Hour</span>
+                    <span id="hnumber"></span>
+                    <div id="hour"></div>
+                </div>
+                <div id="mclock">
+                    <span id="name">Mintue</span>
+                    <span id="mnumber"></span>
+                    <div id="minute"></div>
+                </div>
+                <span id="name">Second</span>
+                <div id="second"></div>
+                <span id="snumber"></span>
+            </div>
+            <div class="center">
+                <img src="./earth2.png" alt="" width="50">
+                <div id="little"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const hour = document.getElementById('hour')
+        const minute = document.getElementById('minute')
+        const second = document.getElementById('second')
+        const hnumber = document.getElementById('hnumber')
+        const mnumber = document.getElementById('mnumber')
+        const snumber = document.getElementById('snumber')
+        const center = document.getElementsByClassName('center')[0]
+        const img = document.getElementsByTagName('img')[0]
+        const little = document.getElementById('little')
+
+        const update = () => {
+            const now = new Date()
+
+            hour.style.transform = `rotate(${now.getHours() * 30}deg) translateY(-75px)`
+            minute.style.transform = `rotate(${now.getMinutes() * 6}deg) translateY(-125px)`
+            second.style.transform = `rotate(${now.getSeconds() * 6}deg) translateY(-175px)`
+            little.style.transform = `rotate(${now.getSeconds() * 36}deg) translateY(-25px)`
+            hnumber.innerText = `${now.getHours()}`
+            mnumber.innerText = `${now.getMinutes()}`
+            snumber.innerText = `${now.getSeconds()}`
+            img.style.transform = `rotate(-${now.getSeconds() * 6}deg)`
+        }
+
+
+        setInterval((update), 1000)
+        update()
+    </script>
+</body>
+
+</html>
